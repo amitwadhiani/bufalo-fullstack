@@ -7,6 +7,8 @@ services:
     restart: always
     container_name: rw_db
     hostname: rw_db
+    volumes:
+      - /root/buff_app/postgress:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     environment:
