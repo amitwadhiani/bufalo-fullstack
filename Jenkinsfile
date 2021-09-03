@@ -15,11 +15,11 @@ node {
       }
     }
     stage('Db Creation') {     
-      withCredentials([string(credentialsId: 'sshHostPassSecret', variable: 'pass')]) {
+      withCredentials([string(credentialsId: 'sshHostPassSecret', variable: 'pass')], [string(credentialsId: 'databasePassword', variable: 'dbPass')]) {
         sh"""
         sshpass -p $pass ssh root@188.166.87.169
         echo "Login to Host successfull"
-        docker run --name rw_db -e POSTGRES_DB=gobuff_realworld_example_app_development -e POSTGRES_PASSWORD=${databasePassword} -e POSTGRES_USER=postgres -p 5432:5432 -d postgres
+        docker run --name rw_db -e POSTGRES_DB=gobuff_realworld_example_app_development -e POSTGRES_PASSWORD=$dbPass -e POSTGRES_USER=postgres -p 5432:5432 -d postgres
         sleep 30
         """
         }
