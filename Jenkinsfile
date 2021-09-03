@@ -15,7 +15,7 @@ node {
       }
     }
     stage('Db Creation') {     
-      withCredentials([string(credentialsId: 'sshHostPassSecret', variable: 'pass'), string(credentialsId: 'databasePassword', variable: 'dbPass')] {
+      withCredentials([string(credentialsId: 'sshHostPassSecret', variable: 'pass'), string(credentialsId: 'databasePassword', variable: 'dbPass')]) {
         sh"""
         sshpass -p $pass ssh root@188.166.87.169
         echo "Login to Host successfull"
