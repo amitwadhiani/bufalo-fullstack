@@ -1,0 +1,22 @@
+pipeline {
+  agent any
+  triggers {
+      cron('0 0,12 * * *')
+      }
+  stages {  
+    stage('Docker images cleanup with <none> tag') {
+      steps {
+        script {
+          withCredentials([string(credentialsId: 'sshHostPassSecret', variable: 'pass')]) {
+            sh"""
+            sshpass -p $pass ssh root@188.166.87.169
+            echo "Login to Host successfull"
+            docker rmi -f \$(docker images -a | grep "^<none>" | awk '{print \$3}')
+            """
+            }
+          }
+        }
+      }
+    }
+  }
+
