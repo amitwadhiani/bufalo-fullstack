@@ -47,6 +47,18 @@
         "dockerRegistryPassword": {
             "type": "securestring"
         },
+        "databaseUrl": {
+            "type": "string"
+        },
+        "databaseHost": {
+            "type": "string"
+        },
+        "testDatabaseUrl": {
+            "type": "securestring"
+        },
+        "databasePassword": {
+            "type": "securestring"
+        },
         "dockerRegistryStartupCommand": {
             "type": "string"
         }
@@ -97,6 +109,22 @@
                         {
                             "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
                             "value": "false"
+                        },
+                        {
+                            "name": "DATABASE_HOST",
+                            "value": "[parameters('databaseHost')]"
+                        }, 
+                        {
+                            "name": "TEST_DATABASE_URL",
+                            "value": "[parameters('testDatabaseUrl')]"
+                        },
+                        {
+                            "name": "DATABASE_URL",
+                            "value": "[parameters('databaseUrl')]"
+                        },
+                        {
+                            "name": "DATABASE_PASSWORD",
+                            "value": "[parameters('databasePassword')]"
                         }
                     ],
                     "linuxFxVersion": "[parameters('linuxFxVersion')]",
